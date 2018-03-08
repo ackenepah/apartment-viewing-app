@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import Modal from './Modal';
 import data from '../listings.json';
 
 class ApartmentListings extends Component {
@@ -7,8 +9,17 @@ class ApartmentListings extends Component {
 
     this.state = {
       listings: data,
-      viewerModal: false
+      viewerModal: false,
+      listingDetails: {}
     }
+  }
+
+  handleClick(l) {
+    this.setState({viewerModal: true, listingDetails: l})
+  }
+
+  handleClose() {
+    this.setState({viewerModal: false, listingDetails: {}})
   }
 
   render() {
@@ -17,11 +28,14 @@ class ApartmentListings extends Component {
         <ul>
           {
             this.state.listings.map((listings, key) => {
-              console.log('LISTINGS', listings)
-              return <li key={key}>{listings.address.street}, {listings.address.city}, {listings.address.state}</li>
+              return <li key={key} onClick={()=>{this.handleClick(listings)}}>{listings.address.street}, {listings.address.city}, {listings.address.state}</li>
             })
           }
         </ul>
+
+        <Modal show={this.state.viewerModal}
+               details={this.state.listingDetails}
+               close={this.handleClose.bind(this)} />
       </div>
     )
   }

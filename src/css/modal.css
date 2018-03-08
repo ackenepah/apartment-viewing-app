@@ -1,0 +1,17 @@
+.modal {
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.modal-content {
+  background-color: blue;
+  width: 400px;
+  height: 300px;
+}
